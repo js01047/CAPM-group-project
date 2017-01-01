@@ -1,35 +1,43 @@
 function [A,B,D]=CAPMmodel(fromdate,todate,nameofcompany,riskfreesecurity,market)
-c =yahoo('http://download.finance.yahoo.com');
-if riskfreesecurity='UK govt bond'
-    field='Close';
-    sec='UK GILT 5-10 (BG06.L)';
+c =yahoo('http://download.finance.yahoo.com');%establishing connection to yahoo
+
+if riskfreesecurity=='UK govt bond'
+    field='Close';%using the close price from yahoo finance
+    sec='BG06.L';%risk free security reference on yahoo
     A=fetch(c,sec,field,fromdate,todate,'w');
-    
-else riskfreesecurity~='UK govt bond';
-    field='Close';
-    sec='^TYX';
+ %extracting data from yahoo finance for the security between the specified dates, weekly(w)
+ 
+elseif riskfreesecurity=='US treasury bond'
+    field='Close';%using the close price from yahoo finance
+    sec='^TYX';%risk free security reference on yahoo
     A=fetch(c,sec,field,fromdate,todate,'w');
+    %extracting data from yahoo finance for the security between the specified dates, weekly(w)
 end
     
-if market='FTSE 100'
+if market=='FTSE 100'
     c=yahoo('http://download.finance.yahoo.com');
-    field='Close';
-    sec='^FTSE';
+    field='Close';%using the close price from yahoo finance
+    sec='^FTSE';%market reference on yahoo
     B=fetch(c,sec,field,fromdate,todate,'w');
+    %extracting data from yahoo finance for the market between the specified dates, weekly(w)
     
-elseif market='S&P 500'
-    field='Close';
-    sec='^GSPC';
+elseif market=='S&P 500'
+    field='Close';%using the close price from yahoo finance
+    sec='^GSPC';%market reference on yahoo
     B=fetch(c,sec,field,fromdate,todate,'w');
+    %extracting data from yahoo finance for the market between the specified dates, weekly(w)
     
-elseif market='Dow Jones Industrial Average'
-    field='Close';
-    sec='^DJI';
+elseif market=='Dow Jones Industrial Average'
+    field='Close';%using the close price from yahoo finance
+    sec='^DJI';%market reference on yahoo
     B=fetch(c,sec,field,fromdate,todate,'w');
+    %extracting data from yahoo finance for the market between the specified dates, weekly(w)
 end  
 sec=nameofcompany;
 c =yahoo('http://download.finance.yahoo.com');
 field = 'Close'; % retrieve closing price data
 D= fetch(c,sec,field,fromdate,todate,'w');
-close(c)
+%extracting data from yahoo finance for the security between the specified dates, weekly(w)
+
+close(c)%close connection to yahoo
 end
