@@ -63,4 +63,8 @@ company_data= fetch(c,sec,field,fromdate,todate,'w');
 %extracting data from yahoo finance for the security between the specified dates, weekly(w)
 
 close(c)%close connection to yahoo
+
+%the matrices that are generated based on the information that is entered
+%have the date code in the first column and the closing price for the
+%security in the second.
 end
