@@ -13,11 +13,11 @@
 %the javaaddpath function with the bloomberg API path on your system within
 %the brackets e.g. javaaddpath(c:\blp\API\blpapi3.jar)The JAR file path varies
 %depending on the installed Bloomberg software.
-%Then in order to check whether it has been added to the java classpath type java class path then hit enter.
+%Then in order to check whether it has been added to the java classpath type java class path then
+%hit enter.
 %e.g. javaaddpath(c:\blp\API\blpapi3.jar)
 %     java classpath
 %if so it should appear in the list of java paths.
-
 
 function [risk_free_security_data,market_data,company_data]=CAPMmodel(fromdate,todate,nameofcompany,riskfreesecurity,market)
 c =yahoo('http://download.finance.yahoo.com');%establishing connection to yahoo
@@ -29,9 +29,7 @@ if strcmpi(riskfreesecurity,'US treasury bond')
     %extracting data from yahoo finance for the security between the specified dates, weekly(w)
     close(c)
  elseif strcmpi(riskfreesecurity,'UK govt bond')
-    uuid = 12345678;
-    serverip = '111.11.11.111';
-    connection = blpsrv(uuid,serverip);%opening connection to bloomberg
+    connection=blp;%opening connection to bloomberg
     field='LAST_PRICE';%using the close price from yahoo finance
     sec='GUKG30:IND';%risk free security reference on yahoo
     risk_free_security_data=history(connection,sec,field,fromdate,todate,'weekly');
