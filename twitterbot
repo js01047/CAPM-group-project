@@ -1,0 +1,33 @@
+changeinmarketproxy=-1
+
+%below checks to see if all credentials are ok through twitty
+credentials.ConsumerKey='ml1fJlWzBDz263fCXdOKFnZa2'                           
+credentials.ConsumerSecret='J5kpwgu7n2rlntE3ZWjLPZnJ9klu0h8Bi7t0UTlvbyiKmiK6ue'
+credentials.AccessToken='816363615716515841-umZY4yV2l0GxMkdqwMtNzEvpQT62Htk'
+credentials.AccessTokenSecret='GVelNqX4BzPZTYxOBNNqDG6DZJKRLhHTN8lnWoDUSBM2i'
+tw = twitty(credentials)
+tw.setCredentials(credentials) 
+tw.saveCredentials  %this saves credentials rather than just keep typing
+beta = [0.1, 2,.2,3]
+company=['l','o','p','z']
+x=company
+
+msgA =strcat('A recovery!, ',t,' is good to invest in')
+msgB = strcat('A recession !,' t,' is good to invest in')
+
+n=length(company)
+for i = 1:n
+eval([char(x(i)), '=beta(i)'])
+end
+for i=1:n %repeats up to number of companies
+r=beta(i)
+t=x(i)  
+   if r > 1 && changeinmarketproxy>0
+      
+    S = tw.updateStatus(msgA) %tw.update statuses allowes you to put a tweet on to twitter via twitty  
+   else r<1 && changeinmarketproxy<0
+     S = tw.updateStatus(msgB)  
+   
+   end
+pause(600)
+end
