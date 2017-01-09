@@ -1,0 +1,48 @@
+changeinmarketproxy=1;
+
+%below checks to see if all credentials are ok through twitty;
+credentials.ConsumerKey='uek93SszUzd8cPvUO4vgASdKu';                           
+credentials.ConsumerSecret='VmDA7o9QBB6pNyhLD4aAXSNKXsFqCs0GlMc1MzTDX0oZcTKYDE';
+credentials.AccessToken='803564461323853829-s8lQ3JskVRJgJWfVnxZYFemkzya3qbH';
+credentials.AccessTokenSecret='y885sDn6UYpMp6eMOv4QBxjNtOB0mGY9p3gPm9kZbh31H';
+tw = twitty(credentials);
+tw.setCredentials(credentials) 
+tw.saveCredentials  %this saves credentials rather than just keep typing
+beta = [0.1, 2,.2,3];
+
+company = ['l','o','p','z'];
+x=company;
+n=length(company);
+for i =1:n
+eval([char(x(i)), '=beta(i)'])    
+end
+for i =1:n
+eval([char(x(i)), '=alpha(i)'])    
+end
+
+for i=1:n %repeats up to number of companies
+r=beta(i);
+x=company;
+t=changeinmarketproxy;
+u=alpha(i)
+for  
+if u==0
+    s=tw.updatestatus(strcat(x , ',financial performance of the company is similar to market competitors'))
+else 0<u<0.05 
+    s=tw.updatestatus(strcat(x , ',companies performance are better than all others in the industry- good long term investment'))
+else u>0.05 
+    s=tw.updatestatus(strcat(x , ',what an outstanding performance, it leaves almost no chance to its competitors'))
+else -0.05<u<0
+    s=tw.updatestatus(strcat(x, ',seems like this company isnt doing too well, whether it is a temporary blip, time will tell'))
+else u<-0.05
+    s=tw.updatestatus(strcat(x, ',bad choice for investment, if you still fancy investing in this industry, try a competitor'))
+    
+   if r > 1 && t>0
+       s= tw.updatestatus(strcat(x , ',okay to invest'));
+     
+   else r<1 && t<0;
+     s= tw.updatestatus(strcat(x , ',bad to invest'));  
+   
+   end
+pause(150)
+end
