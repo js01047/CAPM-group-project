@@ -1,0 +1,26 @@
+alpha =[0.03, -0.04, 0.1, -0.1];
+company =['l','o','p','z'];
+n=length(company);
+for i =1:n
+eval([char(x(i)), '=alpha(i)'])    
+end
+
+switch (alpha)
+    case '-1' 
+        u=0;
+    s=tw.updatestatus(strcat(x , ',financial performance of the company is similar to market competitors'));
+    case '0' 
+        (0<u) & (u<0.05); 
+    s=tw.updatestatus(strcat(x , ',companies performance are better than all others in the industry- good long term investment'));
+    case '1' 
+        u>0.05; 
+    s=tw.updatestatus(strcat(x , ',what an outstanding performance, it leaves almost no chance to its competitors'));
+    case '2' 
+        (-0.05<u) & (u<0);
+    s=tw.updatestatus(strcat(x, ',seems like this company isnt doing too well, whether it is a temporary blip, time will tell'));
+    case '3' 
+        u<-0.05;
+    s=tw.updatestatus(strcat(x, ',bad choice for investment, if you still fancy investing in this industry, try a competitor'));
+    otherwise
+        s=tw.updatestatus(strcat(x, ',error'));
+end 
